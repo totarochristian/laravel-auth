@@ -33,7 +33,16 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        //
+        $data = $request->validated();
+        $slug = Str::slug($request->title, '-');
+        $data['slug'] = $slug;
+        if ($request->hasFile('image')) {
+            $image_path = Storage::put('uploads', $request->image);
+            $data['image'] = asset('storage/' . $image_path);
+        }
+
+        $project = Project::create($data);
+        return redirect()->route('admin.projects.show', $project->slug);
     }
 
     /**
