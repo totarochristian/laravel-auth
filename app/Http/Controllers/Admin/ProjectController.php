@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -97,7 +99,7 @@ class ProjectController extends Controller
         if ($project->image) {
             Storage::delete($project->image);
         }
-        $post->delete();
+        $project->delete();
         return redirect()->route('admin.projects.index')->with('message', "$project->title deleted successfully.");
     }
 }
