@@ -13,7 +13,7 @@ class StoreProjectRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,25 @@ class StoreProjectRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => 'required|unique:posts|max:150|min:3',
+            'image' => 'nullable|max:255',
+            'body' => 'nullable'
+        ];
+    }
+
+    /**
+     * Get the validation messages that apply to the request's errors.
+     *
+     * @return array<string, mixed>
+     */
+    public function messages()
+    {
+        return [
+            'title.required' => 'Il titolo è obbligatorio!',
+            'title.unique:posts' => 'Questo titolo esiste già!',
+            'title.max' => 'Il titolo deve essere lungo massimo :max caratteri!',
+            'title.min' => 'Il titolo deve essere lungo almeno :min caratteri!',
+            'image.max' => 'La URL deve essere lungo massimo :max caratteri!'
         ];
     }
 }
