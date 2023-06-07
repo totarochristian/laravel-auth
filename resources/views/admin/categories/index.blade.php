@@ -8,7 +8,9 @@
                 <th scope="col">ID</th>
                 <th scope="col">Name</th>
                 <th scope="col">Created at</th>
+                @if (Auth::user()->is_admin)
                 <th scope="col">Tools</th>
+                @endif
             </tr>
         </thead>
         <tbody>
@@ -17,11 +19,13 @@
                     <th scope="row">{{ $category->id }}</th>
                     <td>{{ $category->name }}</td>
                     <td>{{ $category->created_at }}</td>
+                    @if (Auth::user()->is_admin)
                     <td>
                         <a href="{{ route('admin.categories.show', $category->slug) }}">Show</a>
                         <a href="">Edit</a>
                         <a href="">Delete</a>
                     </td>
+                    @endif
                 </tr>
             @endforeach
 
