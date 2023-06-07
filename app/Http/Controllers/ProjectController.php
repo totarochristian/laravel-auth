@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\User;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use Illuminate\Support\Str;
@@ -17,8 +18,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $userId = Auth::id();
-        $projects = Project::where('user_id',$userId)->paginate(3);
+        $user = Auth::user();
+        $projects = $user->is_admin ? Project::paginate(3) : Project::where('user_id', $user->id)->paginate(3);
         return view('admin.projects.index', compact('projects'));
     }
 
