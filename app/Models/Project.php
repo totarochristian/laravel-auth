@@ -12,13 +12,13 @@ class Project extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'slug', 'image', 'body'];
+    protected $fillable = ['title', 'slug', 'image', 'body', 'user_id'];
 
     /**
      * Define the relation with users elements.
      * One project belongs to an user.
      */
-    public function users(): BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

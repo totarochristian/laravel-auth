@@ -46,7 +46,7 @@ class User extends Authenticatable
      * Define the relation with projects elements.
      * One user has many projects.
      */
-    public function projects(){
+    public function project(){
         return $this->hasMany(Project::class);
     }
 }
