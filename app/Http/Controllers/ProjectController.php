@@ -81,6 +81,8 @@ class ProjectController extends Controller
         $data['slug'] = $slug;
         if ($request->hasFile('image')) {
             if ($project->image) {
+                $toBeRemoved = "http://127.0.0.1:8000/storage/";
+                $project->image = str_replace($toBeRemoved, '', $project->image);
                 Storage::delete($project->image);
             }
             $image_path = Storage::put('uploads', $request->image);
@@ -98,6 +100,8 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         if ($project->image) {
+            $toBeRemoved = "http://127.0.0.1:8000/storage/";
+            $project->image = str_replace($toBeRemoved, '', $project->image);
             Storage::delete($project->image);
         }
         $project->delete();
