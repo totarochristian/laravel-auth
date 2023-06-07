@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('projects', function (Blueprint $table) {
             //Create the new column in projects
-            $table->unsignedBigInteger("user_id");
+            $table->unsignedBigInteger("user_id")->nullable()->after("id");
             //Add the foreign relations
             $table->foreign("user_id")->references("id")->on("users");
         });
