@@ -8,6 +8,7 @@ use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -39,6 +40,7 @@ class ProjectController extends Controller
         $data = $request->validated();
         $slug = Str::slug($request->title, '-');
         $data['slug'] = $slug;
+        $data['user_id'] = Auth::id();//Retrieve the id of the user authenticated
         if ($request->hasFile('image')) {
             $image_path = Storage::put('uploads', $request->image);
             $data['image'] = asset('storage/' . $image_path);
