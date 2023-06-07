@@ -13,7 +13,7 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
+    <li class="nav-item {{ strcmp(Route::currentRouteName(),'admin') ? 'active' : '' }}">
         <a class="nav-link" href="{{ url('/admin') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
@@ -27,14 +27,14 @@
         Elementi
     </div>
 
-    <li class="nav-item">
+    <li class="nav-item {{ str_contains(Route::currentRouteName(),'projects') ? 'active' : '' }}">
         <a class="nav-link" role="button" href="{{ route('admin.projects.index') }}">
             <i class="fa-solid fa-note-sticky"></i>
             <span>Progetti</span>
         </a>
     </li>
 
-    <li class="nav-item">
+    <li class="nav-item {{ str_contains(Route::currentRouteName(),'categories') ? 'active' : '' }}">
         <a class="nav-link" role="button" href="{{ route('admin.categories.index') }}">
             <i class="fa-solid fa-note-sticky"></i>
             <span>Categorie</span>
