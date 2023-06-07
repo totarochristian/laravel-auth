@@ -59,7 +59,12 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        return view('admin.projects.show', compact('project'));
+        $user = Auth::user();
+        //Enter in the detail project page only if the user is admin or the user created the project
+        if($user->is_admin || $user->id == $project->user_id)
+            return view('admin.projects.show', compact('project'));
+        else
+            abort(403);
     }
 
     /**
