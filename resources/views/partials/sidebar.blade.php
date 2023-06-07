@@ -13,7 +13,7 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item {{ strcmp(Route::currentRouteName(),'admin') ? 'active' : '' }}">
+    <li class="nav-item {{ str_contains(Route::currentRouteName(),'dashboard') ? 'active' : '' }}">
         <a class="nav-link" href="{{ url('/admin') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
